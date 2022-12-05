@@ -1,13 +1,21 @@
-const fs = require('fs');
+const fsPromises = require('fs').promises;
 const path = require('path');
 
-fs.readFile(path.join(__dirname, 'archivos', 'comienzo.txt'), 'utf8', (err, data) => {
-    if (err) throw err;
-    console.log(data);
-})
 
-console.log('tanto para esto....')
+const fileOps = async () => {
+    try {
+        const data = await fsPromises.readFile(path.join(__dirname, 'archivos', 'comienzo.txt'),'utf8');
+        console.log(data);        
+    } catch (err) {
+        console.error(err);
+    }
+}
 
+fileOps();
+
+
+
+/*
 fs.writeFile(path.join(__dirname, 'archivos', 'copia.txt'), 'Un placer don pepe', (err) => {
     if (err) throw err;
     console.log('Write finalizado!');
@@ -22,6 +30,7 @@ fs.writeFile(path.join(__dirname, 'archivos', 'copia.txt'), 'Un placer don pepe'
         })
     })
 })
+*/
 
 
 
