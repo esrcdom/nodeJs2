@@ -3,15 +3,27 @@ const path = require('path');
 
 fs.readFile(path.join(__dirname, 'archivos', 'comienzo.txt'), 'utf8', (err, data) => {
     if (err) throw err;
-    console.log(data.toString());
+    console.log(data);
 })
 
 console.log('tanto para esto....')
 
-fs.writeFile(path.join(__dirname, 'archivos', 'comienzo.txt'), 'Un placer don pepe', (err) => {
+fs.writeFile(path.join(__dirname, 'archivos', 'copia.txt'), 'Un placer don pepe', (err) => {
     if (err) throw err;
-    console.log('Secuencia finalizada!');
+    console.log('Write finalizado!');
+
+    fs.appendFile(path.join(__dirname, 'archivos', 'copia.txt'), 'Un placer don Marcelo', (err) => {
+        if (err) throw err;
+        console.log(' Append finalizado!');
+
+        fs.rename(path.join(__dirname, 'archivos', 'copia.txt'), path.join(__dirname, 'archivos', 'nuevaCopia.txt'), (err) => {
+            if (err) throw err;
+            console.log('Rename finalizado!');
+        })
+    })
 })
+
+
 
 // salir de errores no detectados
 process.on('uncaughtException', err => {
